@@ -1,45 +1,21 @@
 #include <stdio.h>
-#include <string.h>
+#include <time.h>
 
-void function(char * ptr[]);
+int main() {
+    time_t start_time, end_time;
+    double time_diff;
 
-int main(void)
-{
-    char strings[5][40] = {
-        "This is the first one.",
-        "And this is the second.",
-        "Also, I'm the third.",
-        "Don't forget the fourth!",
-        "So it's the last one."
-    };
-
-    char * ptr[5] = {strings[0], strings[1], strings[2], strings[3], strings[4]};
-
-    function(ptr);
-
-    for (int i = 0; i < 5; i++)
+    time(&start_time);
+    // 模拟一个耗时操作
+    for (int i = 0; i < 100000000; i++)
     {
-        puts(ptr[i]);
+        int j[1000] = {1};
+        
     }
-    
+
+    time(&end_time);
+    time_diff = difftime(end_time, start_time);
+    printf("Time difference: %.2f seconds\n", time_diff);
 
     return 0;
-}
-
-void function(char * ptr[])
-{
-    char * temp;
-    for (int i = 1; i < 5; i++)
-    {
-        for (int j = 0; j < 5 - i; j++)
-        {
-            if (strcmp(ptr[j], ptr[j + 1]) > 0)
-            {
-                temp = ptr[j];
-                ptr[j] = ptr[j + 1];
-                ptr[j + 1] = temp;
-            }
-        }
-    }
-    
 }
