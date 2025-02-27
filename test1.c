@@ -1,21 +1,29 @@
 #include <stdio.h>
-#include <time.h>
 
-int main() {
-    time_t start_time, end_time;
-    double time_diff;
+void swap1(int a, int b)
+{
+    int c;
+    c = a;
+    a = b;
+    b = c;
+    printf("swap1 中的 a = %d, b = %d, c = %d", a, b, c);
+}
 
-    time(&start_time);
-    // 模拟一个耗时操作
-    for (int i = 0; i < 100000000; i++)
-    {
-        int j[1000] = {1};
-        
-    }
+void swap2(int *a, int *b)
+{
+    int c;
+    c = *a;
+    *a = *b;
+    *b = c;
+}
 
-    time(&end_time);
-    time_diff = difftime(end_time, start_time);
-    printf("Time difference: %.2f seconds\n", time_diff);
-
-    return 0;
+void main(void)
+{
+    int x = 100, y = 800;
+    swap1(x, y);
+    printf("\n调用 swap1 后 x = %d, y = %d", x, y);
+    x = 100;
+    y = 800;
+    swap2(&x, &y);
+    printf("\n调用 swap2 后 x = %d, y = %d", x, y);
 }
