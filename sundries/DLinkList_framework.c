@@ -13,6 +13,8 @@ typedef struct DNode {
 DLinkList InitDLinkList(DLinkList *DL);
 // 销毁双向链表
 void DestroyDLinkList(DLinkList *DL);
+// 求双向链表长度
+int GetDLinkListLength(DLinkList DL);
 // 向双向链表中第 i 个位置插入值为 e 的新元素
 int DLinkIns(DLinkList DL, int i, int e);
 // 从双链表中删除第 i 个元素，并将删除的元素值保存到变量 e 中
@@ -62,6 +64,19 @@ void DestroyDLinkList(DLinkList *DL)
     }
     free(*DL);          // 最后释放表头内存
     *DL = NULL;         // 防止悬空指针
+}
+
+// 求双向链表长度
+int GetDLinkListLength(DLinkList DL)
+{
+    int length = 0;
+    DLinkList p = DL;
+    while (p->next != DL)
+    {
+        length++;
+        p = p->next;
+    }
+    return length;
 }
 
 // 向双向链表中第 i 个位置插入值为 e 的新元素

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// 双向链表
 typedef struct DNode {
     int data;               // 数据域
     struct DNode * prior;   // 前驱指针域
@@ -14,8 +15,8 @@ DLinkList InitDLinkList(DLinkList *DL)
     *DL = (DLinkList)malloc(sizeof(DNode));
     if (*DL)
     {
-        (*DL)->prior = *DL;
-        (*DL)->next = *DL;
+        (*DL)->prior = NULL;
+        (*DL)->next = NULL;
         return *DL;
     }
     else
@@ -23,28 +24,23 @@ DLinkList InitDLinkList(DLinkList *DL)
         return NULL;
 }
 
-// 尾插法向链表中添加元素
-void DLinkInsert(DLinkList list, int data)
+// 向链表末尾添加元素
+void DLinkInsertEnd(DLinkList DL, int data)
 {
-    DLinkList p = list;
-    if (p == NULL)
-        return;
-    else
-    {
-        while (p->next)
-            p = p->next;
-        DLinkList pnew = (DLinkList)malloc(sizeof(DNode));
-        pnew->data = data;
-        p->next = pnew;
-        pnew->prior = p;
-        pnew->next = NULL;
-    }
+    DLinkList p = DL;
+    while (p->next)
+        p = p->next;
+    DLinkList p_new = (DLinkList)malloc(sizeof(DNode));
+    p_new->data = data;
+    p->next = p_new;
+    p_new->prior = p;
+    p_new->next = NULL;
 }
 
-void PrintDLinkList(DLinkList list, int n)
+// 遍历链表并输出指定位数的小数
+void PrintDLinkList(DLinkList DL, int n)
 {
-    // 遍历链表并输出指定位数的小数 
-    DLinkList p = list;
+    DLinkList p = DL;
     p = p->next;
     printf("%d.", p->data);
     int i;
@@ -64,12 +60,8 @@ int main(void)
 {
     DLinkList num;      // num为每次相加的 R(n); 
     DLinkList sum;      // sum最终的值约等于 Pi；
-    num = (DLinkList)malloc(sizeof(DNode));
-    sum = (DLinkList)malloc(sizeof(DNode));
-    num->prior = NULL;
-    sum->prior = NULL;
-    num->next = NULL;
-    sum->next = NULL;
+    InitDLinkList(&num);
+    InitDLinkList(&sum);
     // n 为题目要求输出的的 Pi 的小数位数； 
     int n;
     scanf("%d", &n);
@@ -77,8 +69,8 @@ int main(void)
     int i;
     for (i = 0; i < 600; i++)
     {
-        DLinkInsert(num, 0);
-        DLinkInsert(sum, 0);
+        DLinkInsertEnd(num, 0);
+        DLinkInsertEnd(sum, 0);
     }
     // p1,p2为指向两个链表的指针 
     DLinkList p1 = num->next;
