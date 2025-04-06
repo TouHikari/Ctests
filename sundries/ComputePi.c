@@ -6,30 +6,30 @@ typedef struct DNode {
     int data;               // 数据域
     struct DNode * prior;   // 前驱指针域
     struct DNode * next;    // 后继指针域
-} DNode, * DLinkList;
+} DNode, * aa;
 
 // 初始化一个双向链表
-DLinkList InitDLinkList(DLinkList *DL);
+aa InitDLinkList(aa *DL);
 // 销毁双向链表
-void DestroyDLinkList(DLinkList *DL);
+void DestroyDLinkList(aa *DL);
 // 向链表末尾添加元素
-void DLinkInsertEnd(DLinkList DL, int data);
+void DLinkInsertEnd(aa DL, int data);
 // 遍历链表并输出指定位数的小数
 // 链表第一个结点中存储整数部分，之后每个结点存储一位小数
-void PrintDLinkList(DLinkList DL, int digits);
+void PrintDLinkList(aa DL, int digits);
 // 大数加法，将结果保存在 num2 中，两个加数必须小数位相同
-DLinkList BigAdd(DLinkList num1, DLinkList num2);
+aa BigAdd(aa num1, aa num2);
 // 大数与一个 int 型的乘法，原地相乘将结果保存在 num 中
-DLinkList BigMul(DLinkList num, int multiplier);
+aa BigMul(aa num, int multiplier);
 // 大数与一个 int 型的除法，原地相除将结果保存在 num 中
-DLinkList BigDiv(DLinkList num, int divisor);
+aa BigDiv(aa num, int divisor);
 // 精确计算 Pi 的值，至少保证小数点后 digits 位的正确性
-DLinkList ComputePi(int digits);
+aa ComputePi(int digits);
 
 int main(void)
 {
     // 存放结果的双向链表
-    DLinkList result;
+    aa result;
     
     // 读取要求输出的的 Pi 的小数位数
     int n;
@@ -48,10 +48,10 @@ int main(void)
 }
 
 // 初始化一个双向链表
-DLinkList InitDLinkList(DLinkList *DL)
+aa InitDLinkList(aa *DL)
 {
     // 申请内存以存储新表头
-    *DL = (DLinkList)malloc(sizeof(DNode));
+    *DL = (aa)malloc(sizeof(DNode));
     if (*DL)
     {
         // 若申请内存成功，前驱与后继指针置空
@@ -65,7 +65,7 @@ DLinkList InitDLinkList(DLinkList *DL)
 }
 
 // 销毁双向链表
-void DestroyDLinkList(DLinkList *DL)
+void DestroyDLinkList(aa *DL)
 {
     DNode * p = (*DL)->next;
     while (p != NULL)   // 从表头的下一个结点开始依次释放各结点内存
@@ -79,14 +79,14 @@ void DestroyDLinkList(DLinkList *DL)
 }
 
 // 向链表末尾添加元素
-void DLinkInsertEnd(DLinkList DL, int data)
+void DLinkInsertEnd(aa DL, int data)
 {
-    DLinkList p = DL;   // 声明链表指针
+    aa p = DL;   // 声明链表指针
     while (p->next)
         p = p->next;    // 找到最后一个结点
 
     // 建立新结点，并且连接到链表中
-    DLinkList p_new = (DLinkList)malloc(sizeof(DNode));
+    aa p_new = (aa)malloc(sizeof(DNode));
     p_new->data = data;
     p->next = p_new;
     p_new->prior = p;
@@ -95,9 +95,9 @@ void DLinkInsertEnd(DLinkList DL, int data)
 
 // 遍历链表并输出指定位数的小数
 // 链表第一个结点中存储整数部分，之后每个结点存储一位小数
-void PrintDLinkList(DLinkList DL, int digits)
+void PrintDLinkList(aa DL, int digits)
 {
-    DLinkList p = DL->next;
+    aa p = DL->next;
 
     // 输出整数部分
     printf("%d.", p->data);
@@ -114,11 +114,11 @@ void PrintDLinkList(DLinkList DL, int digits)
 }
 
 // 大数加法，将结果保存在 num2 中，两个加数必须小数位相同
-DLinkList BigAdd(DLinkList num1, DLinkList num2)
+aa BigAdd(aa num1, aa num2)
 {
     // 创建两个指针，分别移动到两个链表末尾
-    DLinkList p1 = num1;
-    DLinkList p2 = num2;
+    aa p1 = num1;
+    aa p2 = num2;
     while (p1->next)
         p1 = p1->next;
     while (p2->next)
@@ -138,10 +138,10 @@ DLinkList BigAdd(DLinkList num1, DLinkList num2)
 }
 
 // 大数与一个 int 型的乘法，原地相乘将结果保存在 num 中
-DLinkList BigMul(DLinkList num, int multiplier)
+aa BigMul(aa num, int multiplier)
 {
     // 创建指针，移动到链表末尾
-    DLinkList p = num;
+    aa p = num;
     while (p->next)
         p = p->next;
     
@@ -158,9 +158,9 @@ DLinkList BigMul(DLinkList num, int multiplier)
 }
 
 // 大数与一个 int 型的除法，原地相除将结果保存在 num 中
-DLinkList BigDiv(DLinkList num, int divisor)
+aa BigDiv(aa num, int divisor)
 {
-    DLinkList p = num->next;
+    aa p = num->next;
 
     int ret = 0;        // 存放进位值
     int temp = 0;       // 存放临时值
@@ -175,10 +175,10 @@ DLinkList BigDiv(DLinkList num, int divisor)
 }
 
 // 精确计算 Pi 的值，至少保证小数点后 digits 位的正确性
-DLinkList ComputePi(int digits)
+aa ComputePi(int digits)
 {
-    DLinkList num;          // num 为每次相加的 R(n)
-    DLinkList sum;          // sum 最终的值约等于 Pi
+    aa num;          // num 为每次相加的 R(n)
+    aa sum;          // sum 最终的值约等于 Pi
     InitDLinkList(&num);
     InitDLinkList(&sum);
 
@@ -190,8 +190,8 @@ DLinkList ComputePi(int digits)
     }
 
     // p1, p2 为指向两个链表的指针 
-    DLinkList p1 = num->next;
-    DLinkList p2 = sum->next;
+    aa p1 = num->next;
+    aa p2 = sum->next;
     // 使两个链表除头节点外第一个节点的数据为2，计算直接从 R(2) 开始计算，简化了计算
     p1->data = 2;
     p2->data = 2;

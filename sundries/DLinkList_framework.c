@@ -7,30 +7,30 @@ typedef struct DNode {
     int data;               // 数据域
     struct DNode * prior;   // 前驱指针域
     struct DNode * next;    // 后继指针域
-} DNode, * DLinkList;
+} DNode, * aa;
 
 // 初始化一个双向链表
-DLinkList InitDLinkList(DLinkList *DL);
+aa InitDLinkList(aa *DL);
 // 销毁双向链表
-void DestroyDLinkList(DLinkList *DL);
+void DestroyDLinkList(aa *DL);
 // 求双向链表长度
-int GetDLinkListLength(DLinkList DL);
+int GetDLinkListLength(aa DL);
 // 向双向链表中第 i 个位置插入值为 e 的新元素
-int DLinkIns(DLinkList DL, int i, int e);
+int DLinkIns(aa DL, int i, int e);
 // 从双链表中删除第 i 个元素，并将删除的元素值保存到变量 e 中
-int DLinkDel(DLinkList DL, int i, int *e);
+int DLinkDel(aa DL, int i, int *e);
 // 打印链表存储的数字，按小数输出
-void PrintDecimalDLinkList(DLinkList DL);
+void PrintDecimalDLinkList(aa DL);
 // 复制一个双向链表
-DLinkList CopyDLinkList(DLinkList DL);
+aa CopyDLinkList(aa DL);
 // 两个双向链表表示的数相加，结果存储在新的双向链表中
-DLinkList AddDLinkList(DLinkList a, DLinkList b);
+aa AddDLinkList(aa a, aa b);
 // 双向链表表示的数与整数相乘，结果存储在新的双向链表中
-DLinkList MulDLinkListByInt(DLinkList a, int factor);
+aa MulDLinkListByInt(aa a, int factor);
 // 两个双向链表表示的数相乘，结果存储在新的双向链表中
-DLinkList MulDLinkList(DLinkList a, DLinkList b);
+aa MulDLinkList(aa a, aa b);
 // 创建表示常数的双向链表
-DLinkList CreateConstant(int constant);
+aa CreateConstant(int constant);
 
 int main(void)
 {
@@ -38,10 +38,10 @@ int main(void)
 }
 
 // 初始化一个双向链表
-DLinkList InitDLinkList(DLinkList *DL)
+aa InitDLinkList(aa *DL)
 {
     // 申请内存以存储新表头
-    *DL = (DLinkList)malloc(sizeof(DNode));
+    *DL = (aa)malloc(sizeof(DNode));
     if (*DL)
     {
         (*DL)->prior = *DL;
@@ -53,7 +53,7 @@ DLinkList InitDLinkList(DLinkList *DL)
 }
 
 // 销毁双向链表
-void DestroyDLinkList(DLinkList *DL)
+void DestroyDLinkList(aa *DL)
 {
     DNode * p = (*DL)->next;
     while (p != *DL)    // 从表头的下一个结点开始依次释放各结点内存
@@ -67,10 +67,10 @@ void DestroyDLinkList(DLinkList *DL)
 }
 
 // 求双向链表长度
-int GetDLinkListLength(DLinkList DL)
+int GetDLinkListLength(aa DL)
 {
     int length = 0;
-    DLinkList p = DL;
+    aa p = DL;
     while (p->next != DL)
     {
         length++;
@@ -80,7 +80,7 @@ int GetDLinkListLength(DLinkList DL)
 }
 
 // 向双向链表中第 i 个位置插入值为 e 的新元素
-int DLinkIns(DLinkList DL, int i, int e)
+int DLinkIns(aa DL, int i, int e)
 {
     DNode * s, * p;
 
@@ -120,7 +120,7 @@ int DLinkIns(DLinkList DL, int i, int e)
 }
 
 // 从双链表中删除第 i 个元素，并将删除的元素值保存到变量 e 中
-int DLinkDel(DLinkList DL, int i, int *e)
+int DLinkDel(aa DL, int i, int *e)
 {
     DNode * p;
 
@@ -151,9 +151,9 @@ int DLinkDel(DLinkList DL, int i, int *e)
 }
 
 // 打印链表存储的数字，按小数输出
-void PrintDecimalDLinkList(DLinkList DL)
+void PrintDecimalDLinkList(aa DL)
 {
-    DLinkList p = DL->next;
+    aa p = DL->next;
     bool first_flag = true;
     while (p != DL)
     {
@@ -169,9 +169,9 @@ void PrintDecimalDLinkList(DLinkList DL)
 }
 
 // 复制一个双向链表
-DLinkList CopyDLinkList(DLinkList DL)
+aa CopyDLinkList(aa DL)
 {
-    DLinkList copy;
+    aa copy;
     if (!InitDLinkList(&copy))
         exit(1);        // 内存分配失败
 
@@ -192,9 +192,9 @@ DLinkList CopyDLinkList(DLinkList DL)
 }
 
 // 两个双向链表表示的数相加，结果存储在新的双向链表中
-DLinkList AddDLinkList(DLinkList a, DLinkList b)
+aa AddDLinkList(aa a, aa b)
 {
-    DLinkList result;
+    aa result;
     if (!InitDLinkList(&result))
         exit(1);        // 内存分配失败
 
@@ -226,9 +226,9 @@ DLinkList AddDLinkList(DLinkList a, DLinkList b)
 }
 
 // 双向链表表示的数与整数相乘，结果存储在新的双向链表中
-DLinkList MulDLinkListByInt(DLinkList a, int factor)
+aa MulDLinkListByInt(aa a, int factor)
 {
-    DLinkList result;
+    aa result;
     if (!InitDLinkList(&result))
         exit(1);        // 内存分配失败
 
@@ -254,9 +254,9 @@ DLinkList MulDLinkListByInt(DLinkList a, int factor)
 }
 
 // 两个双向链表表示的数相乘，结果存储在新的双向链表中
-DLinkList MulDLinkList(DLinkList a, DLinkList b)
+aa MulDLinkList(aa a, aa b)
 {
-    DLinkList result;
+    aa result;
     if (!InitDLinkList(&result))
         exit(1);        // 内存分配失败
 
@@ -266,7 +266,7 @@ DLinkList MulDLinkList(DLinkList a, DLinkList b)
     while (pa != a)
     {
         int carry = 0;
-        DLinkList temp;
+        aa temp;
         if (!InitDLinkList(&temp))
         {
             DestroyDLinkList(&result);
@@ -297,7 +297,7 @@ DLinkList MulDLinkList(DLinkList a, DLinkList b)
         }
 
         // 将 temp 加到 result 上
-        DLinkList new_result = AddDLinkList(result, temp);
+        aa new_result = AddDLinkList(result, temp);
         DestroyDLinkList(&result);
         DestroyDLinkList(&temp);
         result = new_result;
@@ -310,9 +310,9 @@ DLinkList MulDLinkList(DLinkList a, DLinkList b)
 }
 
 // 创建表示常数的双向链表
-DLinkList CreateConstant(int constant)
+aa CreateConstant(int constant)
 {
-    DLinkList constantDL;
+    aa constantDL;
     if (!InitDLinkList(&constantDL))
         exit(1);        // 内存分配失败
 
